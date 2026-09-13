@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order - Solly's Dessert Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark">
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="shop.html">D&G Store</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="order.html">Order Form</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="shop.html">Shop</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h2 class="fw-bold text-warning text-center">Fill an Order Form Today</h2>
+<p class="text-light lead p-3">At Solly's Dessert & Cookies Store, we handcraft premium cookies, cakes and desserts in small batches daily in East London. We pride ourselves on 100% fresh ingredients, affordable prices, and warm delivery to your door. Please complete the order form below with your preferred product, quantity and delivery address. Your order will be sent directly to our WhatsApp for instant confirmation.</p>
+<div class=" card border-0 rounded-4 overlay-hidden text-center">
+
+    <img src="assets/img/cherry-delight-dessert_.jpg" title="order form" class="img-fluid" >
+    <div class="img-overlay d-flex flex-column justify-content-center align-items-center text-center" style="background:rgb(0,0,0,0.5)">
+        <h2 class="card-tilte text-warning fw-bold">Solly's Desser &Cookies Store</h2>
+        <p class="card-text text-white">Baked With love in East London</p>
+        <span class="badge bg-warning text-dark px-3 py-3 mb-4">Order Below</span>
+    </div>
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card shadow border-0 rounded-4 p-4">
+        <h2 class="text-center fw-bold text-warning mb-4">Place Your Order 🍪</h2>
+        
+        <form id="orderForm" action="https://formspree.io/f/YOUR_ID" method="POST">
+          <div class="mb-3">
+            <label class="form-label">Your Name</label>
+            <input id="cName" type="text" class="form-control" name="name" required placeholder="Solly">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">WhatsApp Number</label>
+            <input type="tel" class="form-control" name="phone" required placeholder="081 123 4567">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Select Dessert</label>
+            <select title="options" class="form-select" name="product" id="cProduct" required>
+              <option value="">Choose...</option>
+              <option>Cheese Cake - R120</option>
+              <option>Cinnamon Spiced Rolls (4) - R95</option>
+              <option>Fruit Tart - R85</option>
+              <option>Caramel Cake - R110</option>
+              <option>Red Coffee Bean Pack - R150</option>
+              <option>Cheese Cake Bowl - R70</option>
+            </select>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label">Quantity</label>
+              <input id="cQty" title="order-form" type="number" class="form-control" name="qty" value="1" min="1">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Delivery Date</label>
+              <input title="order-form" type="date" class="form-control" name="date">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Delivery Address (East London)</label>
+            <textarea id="cAddress" class="form-control" name="address" rows="2" placeholder="Street, suburb..."></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Notes (Biscoff / Oreo / no nuts)</label>
+            <input title="order-form" type="text" class="form-control" name="notes">
+          </div>
+
+          <button type="submit" class="btn btn-warning w-100 btn-lg fw-bold">Send Order on WhatsApp</button>
+          <p class="text-center text-muted small mt-3">We will confirm on WhatsApp in 5 mins</p>
+        </form>
+        <script>
+document.getElementById('orderForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  
+  // CHANGE THIS TO CLIENT'S NUMBER - use country code without + and 0
+  // South Africa 081 123 4567 -> 27811234567
+  let clientNumber = "27811234567"; 
+
+  let name = document.getElementById('cName').value;
+  let product = document.getElementById('cProduct').value;
+  let qty = document.getElementById('cQty').value;
+  let phone = document.querySelector('[name="phone"]').value;
+  let address = document.getElementById('cAddress').value || 'Not provided';
+  let deliveryDate = document.querySelector('[name="date"]').value || 'Not specified';
+  let notes = document.querySelector('[name="notes"]').value || 'None';
+
+  let message = `Hi Solly's Dessert & Cookies 🍪
+
+I want to order:
+*Product:* ${product}
+*Quantity:* ${qty}
+*Name:* ${name}
+*WhatsApp Number:* ${phone}
+*Address:* ${address}
+*Delivery Date:* ${deliveryDate}
+*Notes:* ${notes}
+
+Please confirm total & delivery time.`;
+
+  let url = `https://wa.me/${27630433499}?text=${encodeURIComponent(message)}`;
+  
+  window.open(url, '_blank');
+});
+</script>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
